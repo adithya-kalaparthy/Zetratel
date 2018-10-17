@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/gif/png" href="img/z.png">
+	<title>Zetratel</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+<div class="container-fluid">
+	<a class="navbar-brand text-primary font-weight-bold" href="#"><img src="img/z.png" height="40">etratel</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarResponsive">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="index.html">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="about.html">About Us</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="mission.html">Our Mission</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="services.html">Services</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="join.html">Join Us</a>
+			</li>
+		</ul>
+	</div>
+</div>	
+</nav>
+<!-- End Navigation -->
+
+<br><br>
+
+<!--Join Us Form-->
+<div class="container-fluid padding">
+<div class="row welcome text-center">
+	<div class="col-12">
+		<h1 class="display-4">Congratulations.!</h1>
+<hr width="150px">
+	</div>
+	<div class="col-12">
+		<p class="lead">You successfully joined us. We will be in touch with you.<br>We also dropped an email to your inbox please verify your details.</p>
+	</div>
+</div>
+</div>
+<!--End Join Us Form-->
+<?php
+$name = $_POST["name"];
+$email = $_POST["email"];
+$mobile = $_POST["mobile"];
+$linkedin = $_POST["linkedin"];
+$gender = $_POST["gender"];
+$subject = $_POST["subject"];
+
+ini_set('display_errors', 1);
+/*require_once('PHPMailer/PHPMailerAutoload.php');*/
+require_once('PHPMailer/class.phpmailer.php');
+require_once('PHPMailer/class.smtp.php');
+$mail = new PHPMailer();
+$mail->isSMTP();
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = 'ssl';
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = '465';
+$mail->isHTML();
+/*fill the sender email address [eg: jithendra.vivek@gmail.com]*/
+$mail->Username = 'jithendra.vivek@gmail.com';
+/*fill the sender email password [eg: mypassword]*/
+$mail->Password = 'jithendra6051';
+$mail->SetFrom('no-reply@zetratel.com');
+$mail->Subject = 'Welcome to Zetratel';
+$mail->Body = "Hi ".$name.",<br> Welcome to zetratel. Thank you for joining us. Below are the details you gave us.<br><br>Name : " .$name. ".<br>E-mail : " .$email. ".<br>Mobile : " .$mobile. ".<br>LinkedIn : " .$linkedin. ".<br>Gender : " .$gender. ".<br>Subject : " .$subject. "." ;
+$mail->AddAddress($email);
+$mail->Send();
+$mail->ClearAllRecipients();
+$mail->Subject = "".$name." wants to connect with zetratel";
+$mail->Body = "Hi Team Zetratel,<br> A new customer wants to join us. Below are his/her details.<br><br>Name : " .$name. ".<br>E-mail : " .$email. ".<br>Mobile : " .$mobile. ".<br>LinkedIn : " .$linkedin. ".<br>Gender : " .$gender. ".<br>Subject : " .$subject. "." ;
+/*fill the company receiver email address [eg: jithendra.vivek@gmail.com]*/
+$mail->AddAddress('jithendra.vivek@gmail.com');
+$mail->Send();
+?>
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<!--- Footer -->
+<footer>
+	<div class="container-fluid padding">
+	<div class="row text-center font-weight-bold">
+	
+	<div class="col-sm-10 offset-sm-1 col-md-4 offset-md-0">
+		<hr class="light">
+		<h5>Stockholm Office</h5>
+		<hr class="light">
+		<p>Kista Science Tower</p>
+		<p>Färögatan 33, 12th Floor</p>
+		<p>164 51 Kista</p>
+	</div>
+	<div class="col-sm-10 offset-sm-1 col-md-4 offset-md-0">
+		<hr class="light">
+		<a class="logo text-light" href="#"><img src="img/z.png" height="25">etratel</a>
+		<hr class="light">
+		<p><a href="mailto: info@zetratel.com">info@ZetraTel.com</a></p>
+	</div>
+	<div class="col-sm-10 offset-sm-1 col-md-4 offset-md-0">
+		<hr class="light">
+		<h5>Contact Us</h5>
+		<hr class="light">
+		<p>Phone: +46 8 123456</p>
+		<p>Mobile: +46 70 442 2451, +46 73 095 8234</p>
+		
+	</div>
+	<div class="col-12">
+		<hr class="light-100">
+		<h5>&copy; ZetraTel Consulting AB</h5>
+	</div>
+	
+	</div>
+	</div>
+	</footer>
+<!--- End Footer -->
+
+</body>
+</html>
+
+
